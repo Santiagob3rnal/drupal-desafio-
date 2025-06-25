@@ -1,0 +1,28 @@
+name: Portal CV Theme
+type: theme
+base theme: bootstrap5
+description: 'Tema personalizado para o Portal CV baseado em Bootstrap 5'
+core_version_requirement: ^10
+logo: images/logo.png
+favicon: images/favicon.ico
+screenshot: images/screenshot.png
+
+# Regiões do tema
+regions:
+  header: 'Cabeçalho'
+  nav_branding: 'Navegação: Marca'
+  nav_main: 'Navegação: Principal'
+  nav_additional: 'Navegação: Adicional'
+  breadcrumb: 'Caminho de navegação'
+  content: 'Conteúdo'
+  sidebar_first: 'Barra lateral primeira'
+  sidebar_second: 'Barra lateral segunda'
+  footer_first: 'Rodapé primeiro'
+  footer_second: 'Rodapé segundo'
+  footer_third: 'Rodapé terceiro'
+  footer_bottom: 'Rodapé inferior'
+
+# Bibliotecas do tema
+libraries:
+  - portal_cv_theme/global-styling
+  - portal_cv_theme/bootstrap-icons

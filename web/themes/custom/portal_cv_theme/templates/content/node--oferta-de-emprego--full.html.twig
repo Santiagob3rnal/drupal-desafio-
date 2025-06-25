@@ -1,0 +1,110 @@
+{#
+/**
+ * @file
+ * Theme override to display a job offer node.
+ */
+#}
+
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+] %}
+
+{{ attach_library('classy/node') }}
+
+<article{{ attributes.addClass(classes).addClass('job-offer-full') }}>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2{{ title_attributes.addClass('mb-0') }}>{{ label }}</h2>
+      {% if content.field_tipo_contrato %}
+        <span class="badge bg-primary">{{ content.field_tipo_contrato }}</span>
+      {% endif %}
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="job-company mb-4">
+            {% if content.field_empresa %}
+              <h3>{{ content.field_empresa }}</h3>
+            {% endif %}
+            <div class="job-meta d-flex flex-wrap gap-3 text-muted mb-3">
+              {% if content.field_localizacao %}
+                <div><i class="bi bi-geo-alt"></i> {{ content.field_localizacao }}</div>
+              {% endif %}
+              {% if content.field_salario %}
+                <div><i class="bi bi-cash"></i> {{ content.field_salario }}</div>
+              {% endif %}
+              {% if content.field_data_expiracao %}
+                <div><i class="bi bi-calendar"></i> Expira em {{ content.field_data_expiracao }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          {% if content.field_descricao %}
+            <div class="job-description mb-4">
+              <h4>{{ 'Descrição da Oferta'|t }}</h4>
+              {{ content.field_descricao }}
+            </div>
+          {% endif %}
+
+          {% if content.field_requisitos %}
+            <div class="job-requirements mb-4">
+              <h4>{{ 'Requisitos'|t }}</h4>
+              {{ content.field_requisitos }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header bg-light">
+              <h4 class="mb-0">{{ 'Candidatar-se'|t }}</h4>
+            </div>
+            <div class="card-body">
+              <p>Está interessado nesta oportunidade?</p>
+              <a href="/node/add/candidatura?oferta={{ node.id() }}" class="btn btn-primary w-100 mb-2">
+                <i class="bi bi-send me-1"></i> Candidatar-se agora
+              </a>
+              <button class="btn btn-outline-secondary w-100" onclick="window.print();">
+                <i class="bi bi-printer"></i> Imprimir oferta
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header bg-light">
+              <h4 class="mb-0">{{ 'Partilhar'|t }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-around">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('<current>' ) }}" target="_blank" class="btn btn-outline-primary">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url={{ url('<current>' ) }}&text={{ label }}" target="_blank" class="btn btn-outline-info">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url('<current>' ) }}" target="_blank" class="btn btn-outline-secondary">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="mailto:?subject={{ label }}&body={{ url('<current>') }}" class="btn btn-outline-success">
+                  <i class="bi bi-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# VIEW DE OFERTAS RELACIONADAS #}
+  <div class="related-jobs mt-5">
+    <h3>{{ 'Ofertas relacionadas'|t }}</h3>
+    {{ drupal_view('ofertas_relacionadas', 'block_1', node.id) }}
+  </div>
+</article>

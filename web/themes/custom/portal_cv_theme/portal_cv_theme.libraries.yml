@@ -1,0 +1,18 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      css/style.css: {}
+  js:
+    js/portal-cv-theme.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - bootstrap5/global-styling
+
+bootstrap-icons:
+  version: 1.x
+  css:
+    component:
+      //cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css: { type: external }

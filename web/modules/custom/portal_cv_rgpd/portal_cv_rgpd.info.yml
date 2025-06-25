@@ -1,0 +1,5 @@
+name: Portal CV RGPD
+type: module
+description: 'Adiciona funcionalidades de RGPD ao Portal CV'
+package: Custom
+core_version_requirement: ^10

@@ -1,0 +1,5 @@
+saudacao_hora:
+  version: 1.x
+  css:
+    theme:
+      css/saudaçao_hora.css: {}

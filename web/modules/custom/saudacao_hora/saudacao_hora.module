@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Implementa o hook_theme() para o template do bloco.
+ */
+
+/**
+ * Implementa hook_theme().
+ */
+function saudacao_hora_theme() {
+  return [
+    'saudacao_hora_block' => [
+      'variables' => ['mensagem' => NULL],
+    ],
+  ];
+}

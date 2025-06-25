@@ -1,0 +1,37 @@
+% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+
+<div class="job-listings">
+  <div{{ attributes.addClass('row') }}>
+    {% for row in rows %}
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="job-card h-100">
+          <div class="job-card-header">
+            <div class="company-logo">
+              {{ row.content['field_empresa_logo'] }}
+            </div>
+            <div class="job-type {{ row.content['field_tipo_contrato']|clean_class }}">
+              {{ row.content['field_tipo_contrato'] }}
+            </div>
+          </div>
+          <div class="job-card-body">
+            <h3 class="job-title">{{ row.content['field_titulo_cargo'] }}</h3>
+            <div class="company-name">{{ row.content['field_empresa'] }}</div>
+            <div class="job-meta">
+              <span class="location"><i class="bi bi-geo-alt"></i> {{ row.content['field_localizacao'] }}</span>
+              <span class="salary"><i class="bi bi-cash"></i> {{ row.content['field_salario'] }}</span>
+            </div>
+            <div class="job-excerpt">
+              {{ row.content['field_descricao']|striptags|truncate(120) }}
+            </div>
+          </div>
+          <div class="job-card-footer">
+            <a href="{{ path('entity.node.canonical', {'node': row.content['nid'] }) }}" class="btn btn-outline-primary btn-sm">Ver detalhes</a>
+            <span class="posted-date">{{ row.content['created']|time_diff }}</span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

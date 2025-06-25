@@ -1,0 +1,8 @@
+name: 'Saudação por Hora'
+type: module
+description: 'Mostra uma saudação adequada conforme a hora do dia.'
+core_version_requirement: ^10
+package: 'Custom'
+dependencies:
+  - drupal:block
+

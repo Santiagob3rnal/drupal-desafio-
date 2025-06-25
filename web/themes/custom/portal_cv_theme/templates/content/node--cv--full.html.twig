@@ -1,0 +1,64 @@
+<article{{ attributes.addClass('cv-full') }}>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2{{ title_attributes.addClass('mb-0') }}>{{ label }}</h2>
+    </div>
+    
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="cv-details">
+            {% if content.field_nome|render %}
+              <div class="cv-field mb-3">
+                <h3 class="field-label">{{ 'Nome'|t }}</h3>
+                <div class="field-value">{{ content.field_nome }}</div>
+              </div>
+            {% endif %}
+            
+            {% if content.field_morada|render %}
+              <div class="cv-field mb-3">
+                <h3 class="field-label">{{ 'Morada'|t }}</h3>
+                <div class="field-value">{{ content.field_morada }}</div>
+              </div>
+            {% endif %}
+            
+            {% if content.field_distrito|render %}
+              <div class="cv-field mb-3">
+                <h3 class="field-label">{{ 'Distrito'|t }}</h3>
+                <div class="field-value">{{ content.field_distrito }}</div>
+              </div>
+            {% endif %}
+            
+            {% if content.field_idade|render %}
+              <div class="cv-field mb-3">
+                <h3 class="field-label">{{ 'Idade'|t }}</h3>
+                <div class="field-value">{{ content.field_idade }}</div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          {% if content.field_cv_file|render %}
+            <div class="cv-file-download card bg-light">
+              <div class="card-body text-center">
+                <i class="bi bi-file-earmark-pdf fs-1 text-danger mb-3"></i>
+                <h4>{{ 'Currículo'|t }}</h4>
+                <p class="text-muted">{{ node.field_cv_file.entity.filename.value }}</p>
+                {{ content.field_cv_file }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-footer bg-light">
+      <div class="cv-meta">
+        <span class="created-date">
+          <i class="bi bi-calendar"></i> {{ 'Submetido em'|t }} {{ node.created.value|format_date('medium') }}
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

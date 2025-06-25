@@ -1,0 +1,7 @@
+name: Candidatura a Oferta
+type: module
+description: Permite candidatar-se a uma oferta de emprego com a oferta já preenchida.
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - node

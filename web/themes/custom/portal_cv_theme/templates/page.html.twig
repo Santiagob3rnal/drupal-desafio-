@@ -1,0 +1,147 @@
+<div class="layout-container">
+
+  {# Cabeçalho #}
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        {{ page.nav_branding }}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+          {{ page.nav_main }}
+
+          <div class="ms-auto">
+            {% if logged_in %}
+              <a href="/user" class="btn btn-sm btn-outline-light me-2">A minha conta</a>
+              <a href="/user/logout" class="btn btn-sm btn-light">Sair</a>
+            {% else %}
+              <a href="/user/login" class="btn btn-sm btn-outline-light me-2">Iniciar sessão</a>
+              <a href="/user/register" class="btn btn-sm btn-light">Registar</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% if is_front %}
+      <div class="hero-banner py-5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <h1 class="display-4 text-white">O seu próximo emprego está à sua espera</h1>
+              <p class="lead text-white-75">Conectamos talento com oportunidades</p>
+              <div class="search-box bg-white p-3 rounded shadow mt-4">
+                <form action="/ofertas-de-emprego" method="get" class="row g-2">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Que emprego procura?" name="field_titulo_do_cargo">
+                  </div>
+                  <div class="col-md-5">
+                    <select class="form-select" name="field_distrito">
+                     <option value="">Qualquer localização</option>
+                     <option value="Aveiro">Aveiro</option>
+                     <option value="Beja">Beja</option>
+                     <option value="Braga">Braga</option>
+                     <option value="Bragança">Bragança</option>
+                     <option value="Castelo Branco">Castelo Branco</option>
+                     <option value="Coimbra">Coimbra</option>
+                     <option value="Évora">Évora</option>
+                     <option value="Faro">Faro</option>
+                     <option value="Guarda">Guarda</option>
+                     <option value="Leiria">Leiria</option>
+                     <option value="Lisboa">Lisboa</option>
+                     <option value="Portalegre">Portalegre</option>
+                     <option value="Porto">Porto</option>
+                     <option value="Santarém">Santarém</option>
+                     <option value="Setúbal">Setúbal</option>
+                     <option value="Viana do Castelo">Viana do Castelo</option>
+                     <option value="Vila Real">Vila Real</option>
+                     <option value="Viseu">Viseu</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </header>
+
+  {# Caminho de navegação #}
+  {% if page.breadcrumb %}
+    <div class="breadcrumb-container py-2 bg-light">
+      <div class="container">
+        {{ page.breadcrumb }}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Conteúdo principal #}
+  <main role="main" class="py-4">
+    <div class="container">
+      <div class="row">
+        {# Barra lateral primeira #}
+        {% if page.sidebar_first %}
+          <div class="col-md-3">
+            <aside class="section sidebar-first">
+              {{ page.sidebar_first }}
+            </aside>
+          </div>
+        {% endif %}
+
+        {# Conteúdo principal #}
+        <div class="{{ page.sidebar_first and page.sidebar_second ? 'col-md-6' : page.sidebar_first or page.sidebar_second ? 'col-md-9' : 'col-md-12' }}">
+          {{ page.content }}
+        </div>
+
+        {# Barra lateral segunda #}
+        {% if page.sidebar_second %}
+          <div class="col-md-3">
+            <aside class="section sidebar-second">
+              {{ page.sidebar_second }}
+            </aside>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+
+  {# Rodapé #}
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        {% if page.footer_first %}
+          <div class="col-lg-4 mb-4">
+            {{ page.footer_first }}
+          </div>
+        {% endif %}
+
+        {% if page.footer_second %}
+          <div class="col-lg-4 mb-4">
+            {{ page.footer_second }}
+          </div>
+        {% endif %}
+
+        {% if page.footer_third %}
+          <div class="col-lg-4 mb-4">
+            {{ page.footer_third }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if page.footer_bottom %}
+      <div class="footer-bottom">
+        <div class="container">
+          {{ page.footer_bottom }}
+        </div>
+      </div>
+    {% endif %}
+  </footer>
+
+</div>

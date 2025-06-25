@@ -1,0 +1,38 @@
+/**
+ * @file
+ * JavaScript personalizado para Portal CV Theme.
+ */
+(function ($, Drupal, once) {
+  'use strict';
+
+  Drupal.behaviors.portalCvTheme = {
+    attach: function (context, settings) {
+      once('portalCvTheme', 'html', context).forEach(function () {
+        // Adicionar classes aos cartões de emprego
+        $('.view-ofertas-emprego .views-row').each(function() {
+          $(this).find('.card').addClass('job-card');
+          $(this).find('.card-body').addClass('job-card-body');
+          $(this).find('.card-title').addClass('job-title');
+          $(this).find('.card-footer').addClass('job-card-footer');
+        });
+        
+        // Adicionar tooltips a elementos com data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+        
+        // Adicionar comportamento de scroll suave para âncoras
+        $('a[href*="#"]:not([href="#"])').click(function() {
+          if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+              $('html, body').animate({
+                scrollTop: target.offset().top - 100
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
+    }
+  };
+})(jQuery, Drupal, once);

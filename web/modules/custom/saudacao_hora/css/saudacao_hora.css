@@ -1,0 +1,11 @@
+.saudacao-hora-block {
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.saudacao-hora-block h3 {
+  margin: 0;
+  color: #3366cc;
+}

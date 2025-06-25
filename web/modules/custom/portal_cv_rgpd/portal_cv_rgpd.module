@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contém funcionalidades de RGPD para o Portal CV.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implementa hook_form_alter().
+ */
+function portal_cv_rgpd_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Adicionar campo de consentimento RGPD aos formulários relevantes
+  if (in_array($form_id, ['node_cv_form', 'user_register_form', 'contact_message_feedback_form'])) {
+    $form['rgpd_consent'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Li e aceito a <a href="/politica-privacidade" target="_blank">Política de Privacidade</a> e os <a href="/termos-condicoes" target="_blank">Termos e Condições</a> do Portal CV.'),
+      '#required' => TRUE,
+      '#weight' => 100,
+      '#attributes' => [
+        'class' => ['rgpd-consent-checkbox'],
+      ],
+      '#prefix' => '<div class="rgpd-consent-wrapper alert alert-info">',
+      '#suffix' => '<div class="rgpd-info mt-2"><small>Os seus dados serão tratados de acordo com a nossa Política de Privacidade e utilizados apenas para os fins especificados.</small></div></div>',
+    ];
+    
+    // Adicionar validação
+    $form['#validate'][] = 'portal_cv_rgpd_form_validate';
+  }
+}
+
+/**
+ * Validação do formulário para o consentimento RGPD.
+ */
+function portal_cv_rgpd_form_validate($form, FormStateInterface $form_state) {
+  if (!$form_state->getValue('rgpd_consent')) {
+    $form_state->setErrorByName('rgpd_consent', t('Deve aceitar a Política de Privacidade e os Termos e Condições para continuar.'));
+  }
+}
